@@ -1,4 +1,4 @@
-package me.ghostdevelopment.libmanager.loader;
+package com.github.ghostandry.libmanager.loader;
 
 import java.io.IOException;
 import java.net.URL;

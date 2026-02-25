@@ -1,7 +1,7 @@
-package me.ghostdevelopment.libmanager.loader;
+package com.github.ghostandry.libmanager.loader;
 
-import me.ghostdevelopment.libmanager.api.LibraryAdapter;
-import me.ghostdevelopment.libmanager.utils.LibraryBootstrapper;
+import com.github.ghostandry.libmanager.api.LibraryAdapter;
+import com.github.ghostandry.libmanager.utils.LibraryBootstrapper;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -94,13 +94,13 @@ public class LibraryLoader {
         // ... (can be simplified or kept as is)
         try {
             // Try with (LibraryAdapter, Object)
-            Class<?> adapterClass = Class.forName("me.ghostdevelopment.libmanager.api.LibraryAdapter", true, loader);
+            Class<?> adapterClass = Class.forName("com.github.ghostandry.libmanager.api.LibraryAdapter", true, loader);
             Constructor<?> ctor = clazz.getConstructor(adapterClass, Object.class);
             return ctor.newInstance(adapter, getPlatformPlugin());
         } catch (NoSuchMethodException e) {
             try {
                 // Try with (LibraryAdapter)
-                Class<?> adapterClass = Class.forName("me.ghostdevelopment.libmanager.api.LibraryAdapter", true, loader);
+                Class<?> adapterClass = Class.forName("com.github.ghostandry.libmanager.api.LibraryAdapter", true, loader);
                 Constructor<?> ctor = clazz.getConstructor(adapterClass);
                 return ctor.newInstance(adapter);
             } catch (NoSuchMethodException e2) {

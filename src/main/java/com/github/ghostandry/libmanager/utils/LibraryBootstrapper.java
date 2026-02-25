@@ -1,4 +1,4 @@
-package me.ghostdevelopment.libmanager.utils;
+package com.github.ghostandry.libmanager.utils;
 
 import java.io.File;
 import java.io.InputStream;
