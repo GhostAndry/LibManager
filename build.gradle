@@ -1,0 +1,40 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'me.ghostdevelopment'
+version = '1.0.0'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Dipendenze necessarie per il funzionamento di LibManager
+    // SnakeYAML per caricare file di configurazione delle librerie
+    implementation 'org.yaml:snakeyaml:2.2'
+    
+    // Annotations
+    compileOnly 'org.jetbrains:annotations:26.0.2-1'
+
+    // Testing
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
