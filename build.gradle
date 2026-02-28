@@ -25,43 +25,25 @@ test {
     useJUnitPlatform()
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifactId = 'libmanager'
-
-            pom {
-                name = 'LibManager'
-                description = 'Gestione librerie per progetti Minecraft'
-                url = 'https://github.com/GhostAndry/LibManager'
-                licenses {
-                    license {
-                        name = 'MIT'
-                        url = 'https://opensource.org/licenses/MIT'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'GhostAndry'
-                        name = 'Andrea Ronzoni'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/GhostAndry/LibManager.git'
-                    url = 'https://github.com/GhostAndry/LibManager'
-                }
-            }
+// Carica variabili dal .env
+def envFile = file(".env")
+if (envFile.exists()) {
+    envFile.eachLine { line ->
+        def pair = line.split("=")
+        if (pair.length == 2) {
+            System.setProperty(pair[0].trim(), pair[1].trim())
         }
     }
+}
 
+publishing {
     repositories {
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/GhostAndry/LibManager")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getProperty("GITHUB_ACTOR")
+                password = System.getProperty("GITHUB_TOKEN")
             }
         }
     }
